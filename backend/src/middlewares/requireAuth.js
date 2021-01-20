@@ -5,17 +5,17 @@ const User = mongoose.model('User')
 module.exports = (req, res, next) => {
     const { authorization } = req.headers
 
-    if (!authorization ) {
-        return res.status(401).send({ error: "Please Log In First"})
+    if (!authorization) {
+        return res.status(401).send({ error: "Please Log In First" })
     }
 
     const token = authorization.replace('Bearer ', '')
-    jwt.verify(token, "SECRET_KEY", async (err, payload) => {
+    jwt.verify(token, 'MY_SECRET_KEY', async (err, payload) => {
         if (err) {
-            return res.status(401).send({ error: "Please Log In First"})
+            return res.status(401).send({ error: "Please Log In First" })
         }
 
-        const { userId }= payload
+        const { userId } = payload
 
         const user = await User.findById(userId)
         req.user = user
