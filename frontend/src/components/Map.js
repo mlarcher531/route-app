@@ -15,6 +15,7 @@ const Map = () => {
             longitudeDelta: 0.01,
         })
     }
+    //temp code end
 
     return (
         <MapView
@@ -26,7 +27,7 @@ const Map = () => {
                 longitudeDelta: 0.01,
             }}
         >
-            <Polyline coordinates={points}/>
+            <Polyline coordinates={points} />
         </MapView>
     )
 }
