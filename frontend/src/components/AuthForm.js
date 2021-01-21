@@ -11,6 +11,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
     return (
         <>
             <Spacer>
+                <Spacer />
                 <Text h3>{headerText}</Text>
             </Spacer>
             <Input
