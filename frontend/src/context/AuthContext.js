@@ -11,6 +11,8 @@ const authReducer = (state, action) => {
             return { errorMessage: '', token: action.payload }
         case 'CLEAR_ERROR':
             return { ...state, errorMessage: '' }
+        case 'SIGN_OUT':
+            return { token: null, errorMessage: '' }
         default:
             return state
     }
@@ -60,8 +62,10 @@ const signIn = (dispatch) => {
 }
 
 const signOut = (dispatch) => {
-    return () => {
-
+    return async () => {
+        await AsyncStorage.removeItem('token')
+        dispatch({ type: 'SIGN_OUT' })
+        navigate('loginFlow')
     }
 }
 
