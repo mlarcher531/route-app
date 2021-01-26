@@ -4,6 +4,8 @@ import trackerApi from '../api/tracker'
 
 const trackReducer = (state, action)=> {
     switch (action.type) {
+        case 'GET_TRACKS':
+            return action.payload
         default:
             return state
     }
@@ -11,8 +13,9 @@ const trackReducer = (state, action)=> {
 
 
 const getTracks = (dispatch) =>{
-    return ()=>{
-
+    return async ()=>{
+        const response = await trackerApi.get('/tracks')
+        dispatch({ type: 'GET_TRACKS', payload: response.data })
     }
 }
 
