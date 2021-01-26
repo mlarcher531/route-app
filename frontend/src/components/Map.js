@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { StyleSheet } from 'react-native'
-import { Text } from 'react-native-elements'
+import Spacer from './Spacer'
 import MapView, { Polyline, Circle } from 'react-native-maps'
 import { Context as LocationContext } from '../context/LocationContext'
 
@@ -14,6 +14,7 @@ const Map = () => {
     }
 
     return (
+        <Spacer>
         <MapView
             style={styles.map}
             initialRegion={{
@@ -32,6 +33,7 @@ const Map = () => {
             coordinates={locations.map(location => location.coords)}
             />
         </MapView>
+        </Spacer>
     )
 }
 
