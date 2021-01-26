@@ -9,8 +9,6 @@ const TrackListScreen = ({ navigation }) => {
 
     const { state, getTracks } = useContext(TrackContext)
 
-    console.log(state)
-
     return (
         <>
             <NavigationEvents onWillFocus={getTracks} />

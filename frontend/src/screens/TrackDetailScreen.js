@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { Context as TrackContext } from '../context/TrackContext'
 import  MapView, { Polyline } from 'react-native-maps'
+import TrackDetails from '../components/TrackDetails'
 
 const TrackDetailScreen = ({ navigation }) => {
 
@@ -24,6 +25,7 @@ const TrackDetailScreen = ({ navigation }) => {
             >
                 <Polyline coordinates={track.locations.map((location) => location.coords)} />
             </MapView>
+            <TrackDetails track={track}/>
 
         </>
     )
