@@ -3,34 +3,52 @@ import createDataContext from './createDataContext'
 const locationReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_LOCATION':
-            return {...state, currentLocation: action.payload}
+            return { ...state, currentLocation: action.payload }
+        case 'START_RECORDING':
+            return { ...state, recording: true }
+        case 'TRACK_LOCATION':
+            return { ...state, locations: [...state.locations, action.payload] }
+        case 'STOP_RECORDING':
+            return { ...state, recording: false }
+        case 'CHANGE_NAME':
+            return { ...state, name: action.payload }
         default:
             return state
     }
 }
 
+
+const changeTrackName = (dispatch) => {
+    return (name) => {
+        dispatch({ type: 'CHANGE_NAME', payload: name })
+    }
+}
+
 const startRecording = (dispatch) => {
-    return () =>{
-        
+    return () => {
+        dispatch({ type: 'START_RECORDING' })
+
     }
 }
 
 const stopRecording = (dispatch) => {
-    return () =>{
-        
+    return () => {
+        dispatch({ type: 'STOP_RECORDING' })
     }
 }
 
 const addLocation = (dispatch) => {
-    return (location) =>{
-        console.log('this is tracking')
-        dispatch({ type: 'ADD_LOCATION', payload: location})
+    return (location, recording) => {
+        dispatch({ type: 'ADD_LOCATION', payload: location })
+        if (recording) {
+            dispatch({ type: 'TRACK_LOCATION', payload: location })
+        }
     }
 }
 
 
 export const { Context, Provider } = createDataContext(
     locationReducer,
-    {startRecording, stopRecording, addLocation },
-    {recording: false, locations: [], currentLocation: null}
+    { startRecording, stopRecording, addLocation, changeTrackName },
+    { recording: false, locations: [], currentLocation: null, name: '' }
 )
